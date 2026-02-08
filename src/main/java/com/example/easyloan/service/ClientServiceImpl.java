@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClientServiceImpl {
@@ -29,6 +30,14 @@ public class ClientServiceImpl {
         }
         return clientDto1;
     }
-
+    public ClientEntity addClientData(ClientDto clientDto){
+        Optional<ClientEntity> clientEntity = connectedWithJpa.findById(clientDto.client_id);
+        ClientEntity clientEntity1;
+        if(clientEntity.isEmpty()){
+            clientEntity1 = modelMapper.map(clientDto, ClientEntity.class);
+            return connectedWithJpa.save(clientEntity1);
+        }
+        return null;
+    }
 
 }
