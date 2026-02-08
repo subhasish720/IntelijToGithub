@@ -25,7 +25,7 @@ public class ClientController {
         return new ResponseEntity<>("The data present in client database is : "+clientData, HttpStatus.FOUND);
     }
     @PostMapping("/add/details")
-    public ResponseEntity<?> addClientDetails(@PathVariable ClientDto clientDto){
+    public ResponseEntity<?> addClientDetails(@RequestBody ClientDto clientDto){
         ClientEntity addedClientData = clientService.addClientData(clientDto);
         if(addedClientData == null){
             return new ResponseEntity<>("The provided id in the detail is already present inside the client database, so not added", HttpStatus.NOT_ACCEPTABLE);
